@@ -1,6 +1,8 @@
 const axios = require("axios");
 const cors = require("cors");
-const corsHandler = cors({ origin: "https://app.galxe.com" });
+const corsHandler = cors({
+  origin: ["https://app.galxe.com", "https://galxe.com"],
+});
 
 module.exports = (req, res) => {
   // Handling CORS preflight requests
@@ -20,7 +22,7 @@ module.exports = (req, res) => {
       const balance = BigInt(response.data.result);
       res.json({
         data: {
-          is_ok: balance > 0 ? 1 : 0,
+          is_ok: balance > 0 ? true : false,
         },
       });
     } catch (error) {
